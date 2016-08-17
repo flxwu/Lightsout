@@ -10,19 +10,23 @@ import android.os.Build;
 import android.view.View;
 import android.widget.GridLayout;
 
+import java.util.ArrayList;
+
 /**
  * Created by David Wu on 15.08.2016.
  */
 public class LightView extends View {
     Paint paint = new Paint();
-    protected float centerX = 40, centerY = 200, rad = 200, angle = 90, startangle=315;
+    protected float centerX = 40, centerY = 200, rad = 200, angle = 90, startangle = 315;
     protected int position_x, position_y;
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
+    protected Level level;
 
 
-    public LightView(Context context,Level level) {
+    public LightView(Context context, Level level) {
         super(context);
+        this.level = level;
         paint.setColor(Color.argb(100, 255, 255, 255));
     }
 
@@ -30,8 +34,8 @@ public class LightView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        this.canvas=canvas;
         drawLightCone(canvas, centerX, centerY, rad);
+        drawWall(canvas);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -44,9 +48,15 @@ public class LightView extends View {
         canvas.drawCircle(centerX, centerY, 5, paint);
         paint.setColor(Color.WHITE);
         paint.setAlpha(100);
-        canvas.drawArc(left, top, right, bottom,startangle,angle, true, paint);
+        canvas.drawArc(left, top, right, bottom, startangle, angle, true, paint);
     }
 
+    protected void drawWall(Canvas canvas) {
+        ArrayList<Wall> wallArrayList = level.getWalls();
+        for (int i = 0; i < wallArrayList.size(); i++) {
+            canvas.drawLine(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
+        }
+    }
 
     /*
     Getters and Setters
@@ -68,9 +78,9 @@ public class LightView extends View {
 
     }
 
-    public void setAngles(float startangle,float angle) {
-        this.startangle=startangle;
-        this.angle=angle;
+    public void setAngles(float startangle, float angle) {
+        this.startangle = startangle;
+        this.angle = angle;
     }
 
     public float getCenterX() {
@@ -90,28 +100,24 @@ public class LightView extends View {
      */
 
     public void moveUp() {
-        setCenterY(getCenterY()-10);
-        setAngles(225,90);
+        setCenterY(getCenterY() - 10);
+        setAngles(225, 90);
     }
 
     public void moveDown() {
-        setCenterY(getCenterY()+10);
-        setAngles(45,90);
+        setCenterY(getCenterY() + 10);
+        setAngles(45, 90);
     }
 
     public void moveRight() {
-        setCenterX(getCenterX()+10);
-        setAngles(315,90);
+        setCenterX(getCenterX() + 10);
+        setAngles(315, 90);
     }
 
     public void moveLeft() {
-        setCenterX(getCenterX()-10);
-        setAngles(135,90);
+        setCenterX(getCenterX() - 10);
+        setAngles(135, 90);
     }
 
-    public void addWall(Point start,Point end) {
-        paint.setColor(Color.rgb(255,0,0));
-        this.canvas.drawLine(start.x,start.y,end.x,end.y,paint);
-        this.invalidate();
-    }
+
 }

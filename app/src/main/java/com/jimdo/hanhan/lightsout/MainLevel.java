@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.jimdo.hanhan.lightsout.levels.Level01;
 import com.jimdo.hanhan.lightsout.tools.Level;
 import com.jimdo.hanhan.lightsout.tools.LightView;
 
@@ -18,7 +19,7 @@ import com.jimdo.hanhan.lightsout.tools.LightView;
 public class MainLevel extends AppCompatActivity {
     protected LightView lightView;
     protected Button buttonUp, buttonDown, buttonRight, buttonLeft;
-    protected Level level;
+    protected Level level=new Level01();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class MainLevel extends AppCompatActivity {
         });
 
 
-        lightView = new LightView(this);
+        lightView = new LightView(this,level);
         layout.addView(lightView);
     }
 
