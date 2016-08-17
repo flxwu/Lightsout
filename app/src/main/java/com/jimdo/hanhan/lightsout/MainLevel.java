@@ -93,7 +93,7 @@ public class MainLevel extends AppCompatActivity {
         });
 
 
-        lightView = new LightView(this);
+        lightView = new LightView(this,level);
         layout.addView(lightView);
     }
 
