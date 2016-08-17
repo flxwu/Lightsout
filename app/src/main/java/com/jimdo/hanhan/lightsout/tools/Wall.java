@@ -7,15 +7,15 @@ import android.graphics.Point;
  */
 
 public class Wall {
-    protected Point startcoords, endcoords;
+    Point startcoords,endcoords;
 
-    public Wall(int x1, int y1, int x2, int y2) {
-        startcoords = new Point(x1, y1);
-        endcoords = new Point(x2, y2);
+    public Wall(int x1,int y1,int x2,int y2) {
+        startcoords=new Point(x1,y1);
+        endcoords=new Point(x2,y2);
     }
 
-    public Wall(Point start, Point end) {
-        startcoords = start;
-        endcoords = end;
+    public Wall(Point start,Point end) {
+        startcoords=start;
+        endcoords=end;
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.Point;
 import android.os.Build;
 import android.view.View;
 import android.widget.GridLayout;
@@ -17,13 +17,12 @@ import java.util.ArrayList;
  */
 public class LightView extends View {
     Paint paint = new Paint();
-    protected float centerX = 40, centerY = 200, rad = 100, angle = 90, startangle = 315;
+    protected float centerX = 40, centerY = 200, rad = 200, angle = 90, startangle = 315;
     protected int position_x, position_y;
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
     protected Level level;
-    protected ArrayList<Rect> rectArrayList;
-    protected Rect player;
+
 
     public LightView(Context context, Level level) {
         super(context);
@@ -46,35 +45,17 @@ public class LightView extends View {
         float right = centerX + rad;
         float bottom = centerY + rad;
         paint.setColor(Color.RED);
-        player = new Rect((int) centerX - 5, (int) centerY + 5, (int) centerX + 5, (int) centerY - 5);
-        canvas.drawRect(player, paint);
+        canvas.drawCircle(centerX, centerY, 5, paint);
         paint.setColor(Color.WHITE);
         paint.setAlpha(100);
         canvas.drawArc(left, top, right, bottom, startangle, angle, true, paint);
     }
 
     protected void drawWall(Canvas canvas) {
-        //set arrays
         ArrayList<Wall> wallArrayList = level.getWalls();
-        rectArrayList = new ArrayList<>(wallArrayList.size());
-
-        paint.setColor(Color.rgb(1, 0, 0));
         for (int i = 0; i < wallArrayList.size(); i++) {
-            rectArrayList.add(new Rect(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y));
-            canvas.drawRect(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
+            canvas.drawLine(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
         }
-    }
-
-    protected boolean isCollision() {
-        //TODO
-        for (int i = 0; i < rectArrayList.size(); i++) {
-            if (player.intersect(rectArrayList.get(i))) {
-                return true;
-            } else if (rectArrayList.get(i).intersect(player)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /*
@@ -84,7 +65,6 @@ public class LightView extends View {
     public void setCenterX(float x) {
         this.centerX = x;
         this.invalidate();
-        isCollision();
     }
 
     public void setCenterY(float y) {
