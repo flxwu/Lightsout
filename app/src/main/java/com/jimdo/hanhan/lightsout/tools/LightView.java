@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
 import android.widget.GridLayout;
@@ -22,6 +23,8 @@ public class LightView extends View {
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
     protected Level level;
+    protected ArrayList<Rect> rectArrayList;
+    protected Rect player;
 
 
     public LightView(Context context, Level level) {
@@ -45,7 +48,8 @@ public class LightView extends View {
         float right = centerX + rad;
         float bottom = centerY + rad;
         paint.setColor(Color.RED);
-        canvas.drawCircle(centerX, centerY, 5, paint);
+        player=new Rect((int)centerX-5,(int)centerY-5,(int)centerX+5,(int)centerY+5);
+        canvas.drawRect(player,paint);
         paint.setColor(Color.WHITE);
         paint.setAlpha(100);
         canvas.drawArc(left, top, right, bottom, startangle, angle, true, paint);
@@ -53,9 +57,21 @@ public class LightView extends View {
 
     protected void drawWall(Canvas canvas) {
         ArrayList<Wall> wallArrayList = level.getWalls();
+        rectArrayList=new ArrayList<Rect>(wallArrayList.size());
         for (int i = 0; i < wallArrayList.size(); i++) {
             canvas.drawLine(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
         }
+    }
+
+    protected boolean isCollision() {
+        for(int i=0;i<rectArrayList.size();i++) {
+            if(rectArrayList.get(i).intersect(player)) {
+                return true;
+            }else if(player.intersect(rectArrayList.get(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /*
@@ -65,17 +81,20 @@ public class LightView extends View {
     public void setCenterX(float x) {
         this.centerX = x;
         this.invalidate();
+        isCollision();
     }
 
     public void setCenterY(float y) {
         this.centerY = y;
         this.invalidate();
+        isCollision();
+
     }
 
     public void setRad(float r) {
         this.rad = r;
         this.invalidate();
-
+        isCollision();
     }
 
     public void setAngles(float startangle, float angle) {
