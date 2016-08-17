@@ -1,5 +1,6 @@
 package com.jimdo.hanhan.lightsout;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.jimdo.hanhan.lightsout.levels.Level01;
 import com.jimdo.hanhan.lightsout.tools.Level;
 import com.jimdo.hanhan.lightsout.tools.LightView;
 
@@ -15,10 +17,10 @@ import com.jimdo.hanhan.lightsout.tools.LightView;
  * Created by David Wu on 13.08.2016.
  */
 
-public class MainLevel extends AppCompatActivity {
+public class MainLevel extends Activity {
     protected LightView lightView;
     protected Button buttonUp, buttonDown, buttonRight, buttonLeft;
-    protected Level level;
+    protected Level level= new Level01();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

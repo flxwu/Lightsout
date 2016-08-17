@@ -1,6 +1,7 @@
 package com.jimdo.hanhan.lightsout.tools;
 
 import android.graphics.Point;
+import android.graphics.Rect;
 
 /**
  * Created by David Wu on 16.08.2016.
@@ -14,8 +15,12 @@ public class Wall {
         endcoords=new Point(x2,y2);
     }
 
-    public Wall(Point start,Point end) {
-        startcoords=start;
-        endcoords=end;
+    public Wall(Point topleft,Point bottomright) {
+        startcoords=topleft;
+        endcoords=bottomright;
+    }
+
+    public Rect getRect() {
+        return new Rect(startcoords.x,startcoords.y,endcoords.x,endcoords.y);
     }
 }

@@ -16,7 +16,7 @@ public class Level01 extends Level{
 
     public Level01() {
         arrayList=new ArrayList<Wall>(1);
-        arrayList.add(new Wall(new Point(50,50),new Point(200,50)));
+        arrayList.add(new Wall(new Point(150,100),new Point(200,300)));
     }
 
     @Override

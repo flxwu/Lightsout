@@ -1,11 +1,12 @@
 package com.jimdo.hanhan.lightsout.tools;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
@@ -23,12 +24,12 @@ public class LightView extends View {
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
     protected Level level;
-    protected ArrayList<Rect> rectArrayList;
     protected Rect player;
-
+    protected Context context;
 
     public LightView(Context context, Level level) {
         super(context);
+        this.context = context;
         this.level = level;
         paint.setColor(Color.argb(100, 255, 255, 255));
     }
@@ -48,32 +49,46 @@ public class LightView extends View {
         float right = centerX + rad;
         float bottom = centerY + rad;
         paint.setColor(Color.RED);
-        player=new Rect((int)centerX-5,(int)centerY-5,(int)centerX+5,(int)centerY+5);
-        canvas.drawRect(player,paint);
+        player = new Rect((int) centerX - 5, (int) centerY - 5, (int) centerX + 5, (int) centerY + 5);
+        canvas.drawRect(player, paint);
         paint.setColor(Color.WHITE);
         paint.setAlpha(100);
         canvas.drawArc(left, top, right, bottom, startangle, angle, true, paint);
     }
 
     protected void drawWall(Canvas canvas) {
+        paint.setColor(Color.rgb(3, 0, 0));
         ArrayList<Wall> wallArrayList = level.getWalls();
-        rectArrayList=new ArrayList<Rect>(wallArrayList.size());
         for (int i = 0; i < wallArrayList.size(); i++) {
-            canvas.drawLine(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
+            canvas.drawRect(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
         }
     }
 
     protected boolean isCollision() {
-        for(int i=0;i<rectArrayList.size();i++) {
-            if(rectArrayList.get(i).intersect(player)) {
+        ArrayList<Wall> wallArrayList = level.getWalls();
+
+        for (int i = 0; i < wallArrayList.size(); i++) {
+            if (wallArrayList.get(i).getRect().intersect(player)) {
                 return true;
-            }else if(player.intersect(rectArrayList.get(i))) {
+            } else if (player.intersect(wallArrayList.get(i).getRect())) {
                 return true;
             }
         }
         return false;
     }
 
+    protected void lose() {
+        AlertDialog ad = new AlertDialog.Builder(context).create();
+        ad.setCancelable(false); // This blocks the 'BACK' button
+        ad.setMessage("YOU LOST!");
+        ad.setButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        ad.show();
+    }
     /*
     Getters and Setters
      */
@@ -81,20 +96,25 @@ public class LightView extends View {
     public void setCenterX(float x) {
         this.centerX = x;
         this.invalidate();
-        isCollision();
+        if (isCollision()) {
+            lose();
+        }
     }
 
     public void setCenterY(float y) {
         this.centerY = y;
         this.invalidate();
-        isCollision();
-
+        if (isCollision()) {
+            lose();
+        }
     }
 
     public void setRad(float r) {
         this.rad = r;
         this.invalidate();
-        isCollision();
+        if (isCollision()) {
+            lose();
+        }
     }
 
     public void setAngles(float startangle, float angle) {
