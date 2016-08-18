@@ -1,6 +1,7 @@
 package com.jimdo.hanhan.lightsout.levels;
 
 import android.graphics.Point;
+import android.graphics.Rect;
 
 import com.jimdo.hanhan.lightsout.tools.Level;
 import com.jimdo.hanhan.lightsout.tools.Wall;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Level01 extends Level{
     ArrayList<Wall> arrayList;
-    final static Point GOAL = new Point(400,400);
+    final static Rect GOAL = new Rect(500,500,800,800);
 
     public Level01() {
         arrayList=new ArrayList<Wall>(1);
@@ -25,7 +26,7 @@ public class Level01 extends Level{
     }
 
     @Override
-    public Point getGoal() {
+    public Rect getGoal() {
         return GOAL;
     }
 }
