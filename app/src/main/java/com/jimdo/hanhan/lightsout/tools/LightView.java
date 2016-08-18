@@ -15,6 +15,7 @@ import android.widget.GridLayout;
 
 import com.jimdo.hanhan.lightsout.LoseScreen;
 import com.jimdo.hanhan.lightsout.MainLevel;
+import com.jimdo.hanhan.lightsout.WinScreen;
 
 import java.util.ArrayList;
 
@@ -85,6 +86,20 @@ public class LightView extends View {
         Intent intent = new Intent(activity, LoseScreen.class);
         activity.startActivity(intent);
     }
+
+    protected boolean isWin() {
+        if(player.intersect(level.getGoal())) {
+            return true;
+        }else if(level.getGoal().intersect(player)) {
+            return true;
+        }
+        return false;
+    }
+
+    protected void win() {
+        Intent intent = new Intent(activity, WinScreen.class);
+        activity.startActivity(intent);
+    }
     /*
     Getters and Setters
      */
@@ -95,6 +110,9 @@ public class LightView extends View {
         if (isCollision()) {
             lose();
         }
+        if(isWin()) {
+            win();
+        }
     }
 
     public void setCenterY(float y) {
@@ -103,6 +121,9 @@ public class LightView extends View {
         if (isCollision()) {
             lose();
         }
+        if(isWin()) {
+            win();
+        }
     }
 
     public void setRad(float r) {
@@ -110,6 +131,9 @@ public class LightView extends View {
         this.invalidate();
         if (isCollision()) {
             lose();
+        }
+        if(isWin()) {
+            win();
         }
     }
 
