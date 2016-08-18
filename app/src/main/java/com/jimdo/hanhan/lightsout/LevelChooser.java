@@ -33,7 +33,7 @@ public class LevelChooser extends Activity {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    public Activity activity;
+    protected Activity activity;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -48,7 +48,7 @@ public class LevelChooser extends Activity {
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
-        activity= super.getParent();
+        activity= (Activity) super.getApplicationContext();
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -108,13 +108,14 @@ public class LevelChooser extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_level_chooser, container, false);
+            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             Button btnLevel=(Button) rootView.findViewById(R.id.btnLevel);
 
             btnLevel.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getActivity(),MainLevel.class);
-                    getActivity().startActivity(intent);
+                    Intent intent=new Intent(getActivity(), Level01.class);
                 }
             });
             return rootView;

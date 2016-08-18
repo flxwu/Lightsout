@@ -45,7 +45,6 @@ public class LightView extends View {
         super.onDraw(canvas);
         drawLightCone(canvas, centerX, centerY, rad);
         drawWall(canvas);
-        drawGoal(canvas);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -68,11 +67,6 @@ public class LightView extends View {
         for (int i = 0; i < wallArrayList.size(); i++) {
             canvas.drawRect(wallArrayList.get(i).startcoords.x, wallArrayList.get(i).startcoords.y, wallArrayList.get(i).endcoords.x, wallArrayList.get(i).endcoords.y, paint);
         }
-    }
-
-    protected void drawGoal(Canvas canvas) {
-        paint.setColor(Color.rgb(30,0,0));
-        canvas.drawRect(level.getGoal(),paint);
     }
 
     protected boolean isCollision() {
