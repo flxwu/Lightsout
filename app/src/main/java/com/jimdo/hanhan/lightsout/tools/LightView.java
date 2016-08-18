@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,9 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
 import android.widget.GridLayout;
+
+import com.jimdo.hanhan.lightsout.LoseScreen;
+import com.jimdo.hanhan.lightsout.MainLevel;
 
 import java.util.ArrayList;
 
@@ -25,11 +29,11 @@ public class LightView extends View {
     protected Canvas canvas;
     protected Level level;
     protected Rect player;
-    protected Context context;
+    protected MainLevel activity;
 
-    public LightView(Context context, Level level) {
-        super(context);
-        this.context = context;
+    public LightView(MainLevel activity, Level level) {
+        super(activity);
+        this.activity = activity;
         this.level = level;
         paint.setColor(Color.argb(100, 255, 255, 255));
     }
@@ -78,16 +82,8 @@ public class LightView extends View {
     }
 
     protected void lose() {
-        AlertDialog ad = new AlertDialog.Builder(context).create();
-        ad.setCancelable(false); // This blocks the 'BACK' button
-        ad.setMessage("YOU LOST!");
-        ad.setButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        ad.show();
+        Intent intent = new Intent(activity, LoseScreen.class);
+        activity.startActivity(intent);
     }
     /*
     Getters and Setters
