@@ -18,6 +18,9 @@ import com.jimdo.hanhan.lightsout.MainLevel;
 import com.jimdo.hanhan.lightsout.WinScreen;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 /**
  * Created by David Wu on 15.08.2016.
@@ -31,6 +34,7 @@ public class LightView extends View {
     protected Level level;
     protected Rect player;
     protected MainLevel activity;
+    public final static int DIRECTION_LEFT = 1, DIRECTION_RIGHT = 2, DIRECTION_UP = 3, DIRECTION_DOWN = 4;
 
     public LightView(MainLevel activity, Level level) {
         super(activity);
@@ -71,8 +75,8 @@ public class LightView extends View {
     }
 
     protected void drawGoal(Canvas canvas) {
-        paint.setColor(Color.rgb(30,0,0));
-        canvas.drawRect(level.getGoal(),paint);
+        paint.setColor(Color.rgb(30, 0, 0));
+        canvas.drawRect(level.getGoal(), paint);
     }
 
     protected boolean isCollision() {
@@ -94,9 +98,9 @@ public class LightView extends View {
     }
 
     protected boolean isWin() {
-        if(player.intersect(level.getGoal())) {
+        if (player.intersect(level.getGoal())) {
             return true;
-        }else if(level.getGoal().intersect(player)) {
+        } else if (level.getGoal().intersect(player)) {
             return true;
         }
         return false;
@@ -116,7 +120,7 @@ public class LightView extends View {
         if (isCollision()) {
             lose();
         }
-        if(isWin()) {
+        if (isWin()) {
             win();
         }
     }
@@ -127,7 +131,7 @@ public class LightView extends View {
         if (isCollision()) {
             lose();
         }
-        if(isWin()) {
+        if (isWin()) {
             win();
         }
     }
@@ -138,7 +142,7 @@ public class LightView extends View {
         if (isCollision()) {
             lose();
         }
-        if(isWin()) {
+        if (isWin()) {
             win();
         }
     }
@@ -165,24 +169,43 @@ public class LightView extends View {
      */
 
     public void moveUp() {
-        setCenterY(getCenterY() - 10);
-        setAngles(225, 90);
+        setAngles(225,90);
     }
 
     public void moveDown() {
-        setCenterY(getCenterY() + 10);
         setAngles(45, 90);
     }
 
     public void moveRight() {
-        setCenterX(getCenterX() + 10);
         setAngles(315, 90);
     }
 
     public void moveLeft() {
-        setCenterX(getCenterX() - 10);
         setAngles(135, 90);
     }
 
+    public void move(int direction) {
+        switch (direction) {
+            case DIRECTION_DOWN:
+                setCenterY(getCenterY() + 10);
+                break;
+            case DIRECTION_LEFT:
+                setCenterX(getCenterX() - 10);
+                break;
+            case DIRECTION_RIGHT:
+                setCenterX(getCenterX() + 10);
+                break;
+            case DIRECTION_UP:
+                setCenterY(getCenterY() - 10);
+                break;
+        }
+    }
 
+    class Timer extends TimerTask {
+
+        @Override
+        public void run() {
+
+        }
+    }
 }
