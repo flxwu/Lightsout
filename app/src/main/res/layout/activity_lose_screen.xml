@@ -8,14 +8,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jimdo.hanhan.lightsout.LoseScreen"
-    android:background="#7ca3b1">
+    android:background="#7ca3b1"
+    android:id="@+id/layout"
+    style="@style/Base.Theme.AppCompat.Light.DarkActionBar">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="YOU LOST! :("
-        android:id="@+id/textView"
+        android:id="@+id/tVLost"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="126dp"
@@ -24,4 +26,46 @@
         android:textSize="40dp"
         android:textColor="#c0392b"
         android:fontFamily="sans-serif"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        android:id="@+id/btnHome"
+        android:layout_marginTop="162dp"
+        android:layout_below="@+id/tVLost"
+        android:background="#b34646"
+        android:clickable="true"
+        android:minWidth="150dp"
+        android:minHeight="50dp"
+        style="@android:style/Widget.Holo.Light.Button"
+        android:textStyle="bold|italic"
+        android:textSize="30dp"
+        android:textColorHighlight="@color/accent_material_light"
+        android:theme="@style/Base.AlertDialog.AppCompat.Light"
+        android:textAppearance="@android:style/Holo.SegmentedButton"
+        android:layout_alignRight="@+id/tVLost"
+        android:layout_alignEnd="@+id/tVLost"
+        android:layout_alignLeft="@+id/tVLost"
+        android:layout_alignStart="@+id/tVLost" />
+
+    <Button
+        style="@android:style/Widget.Holo.Light.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Try Again"
+        android:id="@+id/btnTryAgain"
+        android:layout_marginTop="47dp"
+        android:background="#b34646"
+        android:clickable="true"
+        android:minWidth="150dp"
+        android:minHeight="50dp"
+        android:textStyle="bold|italic"
+        android:textSize="30dp"
+        android:textColorHighlight="@color/accent_material_light"
+        android:theme="@style/Base.AlertDialog.AppCompat.Light"
+        android:textAppearance="@android:style/Holo.SegmentedButton"
+        android:layout_below="@+id/btnHome"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
