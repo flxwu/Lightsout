@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="YOU LOST! :("
-        android:id="@+id/tVLost"
+        android:id="@+id/tVWin"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="126dp"
@@ -33,7 +33,7 @@
         android:text="Home"
         android:id="@+id/btnHome"
         android:layout_marginTop="162dp"
-        android:layout_below="@+id/tVLost"
+        android:layout_below="@+id/tVWin"
         android:background="#b34646"
         android:clickable="true"
         android:minWidth="150dp"
@@ -44,10 +44,10 @@
         android:textColorHighlight="@color/accent_material_light"
         android:theme="@style/Base.AlertDialog.AppCompat.Light"
         android:textAppearance="@android:style/Holo.SegmentedButton"
-        android:layout_alignRight="@+id/tVLost"
-        android:layout_alignEnd="@+id/tVLost"
-        android:layout_alignLeft="@+id/tVLost"
-        android:layout_alignStart="@+id/tVLost" />
+        android:layout_alignRight="@+id/tVWin"
+        android:layout_alignEnd="@+id/tVWin"
+        android:layout_alignLeft="@+id/tVWin"
+        android:layout_alignStart="@+id/tVWin" />
 
     <Button
         style="@android:style/Widget.Holo.Light.Button"
