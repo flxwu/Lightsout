@@ -12,7 +12,7 @@ public class WinScreen extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lose_screen);
+        setContentView(R.layout.activity_win_screen);
 
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
@@ -35,5 +35,9 @@ public class WinScreen extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

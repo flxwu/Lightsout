@@ -39,4 +39,8 @@ public class LoseScreen extends Activity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }
