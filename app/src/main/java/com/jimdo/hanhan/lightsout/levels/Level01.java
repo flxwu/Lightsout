@@ -16,8 +16,10 @@ public class Level01 extends Level{
     final static Rect GOAL = new Rect(500,500,800,800);
 
     public Level01() {
-        arrayList=new ArrayList<Wall>(1);
+        arrayList=new ArrayList<Wall>(3);
+        arrayList.add(new Wall(new Point(300,400),new Point(600,650)));
         arrayList.add(new Wall(new Point(150,100),new Point(200,300)));
+        arrayList.add(new Wall(new Point(250,200),new Point(260,350)));
     }
 
     @Override
