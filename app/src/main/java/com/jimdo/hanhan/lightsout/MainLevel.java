@@ -41,7 +41,7 @@ public class MainLevel extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-                    lightView.moveDown();
+                    lightView.turnDown();
                     return true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     return true;
@@ -55,7 +55,7 @@ public class MainLevel extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-                    lightView.moveLeft();
+                    lightView.turnLeft();
                     return true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     return true;
@@ -69,7 +69,7 @@ public class MainLevel extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-                    lightView.moveRight();
+                    lightView.turnRight();
                     return true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     return true;
@@ -83,7 +83,7 @@ public class MainLevel extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
-                    lightView.moveUp();
+                    lightView.turnUp();
                     return true;
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     return true;
@@ -102,20 +102,20 @@ public class MainLevel extends Activity {
     /*
     Move lightView Events
      */
-    public void moveUp(View view) {
-        lightView.moveUp();
+    public void turnUp(View view) {
+        lightView.turnUp();
     }
 
-    public void moveDown(View view) {
-        lightView.moveDown();
+    public void turnDown(View view) {
+        lightView.turnDown();
     }
 
-    public void moveRight(View view) {
-        lightView.moveRight();
+    public void turnRight(View view) {
+        lightView.turnRight();
     }
 
-    public void moveLeft(View view) {
-        lightView.moveLeft();
+    public void turnLeft(View view) {
+        lightView.turnLeft();
     }
 }
 

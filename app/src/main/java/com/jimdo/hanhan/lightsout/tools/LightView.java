@@ -168,19 +168,19 @@ public class LightView extends View {
     Methods for moving
      */
 
-    public void moveUp() {
+    public void turnUp() {
         setAngles(225,90);
     }
 
-    public void moveDown() {
+    public void turnDown() {
         setAngles(45, 90);
     }
 
-    public void moveRight() {
+    public void turnRight() {
         setAngles(315, 90);
     }
 
-    public void moveLeft() {
+    public void turnLeft() {
         setAngles(135, 90);
     }
 
@@ -205,7 +205,7 @@ public class LightView extends View {
 
         @Override
         public void run() {
-
+            
         }
     }
 }
