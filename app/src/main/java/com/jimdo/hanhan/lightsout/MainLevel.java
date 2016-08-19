@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.jimdo.hanhan.lightsout.levels.Level01;
+import com.jimdo.hanhan.lightsout.levels.Level02;
 import com.jimdo.hanhan.lightsout.tools.Level;
 import com.jimdo.hanhan.lightsout.tools.LightView;
 
@@ -19,15 +20,22 @@ import com.jimdo.hanhan.lightsout.tools.LightView;
 public class MainLevel extends Activity {
     protected LightView lightView;
     protected Button buttonUp, buttonDown, buttonRight, buttonLeft;
-    protected Level level = new Level01();
-
-    public MainLevel() {
-
-    }
+    protected Level level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        int level=getIntent().getExtras().getInt("level");
+        switch (level) {
+            case 1:
+                this.level=new Level01();
+                break;
+            case 2:
+                this.level=new Level02();
+                break;
+        }
+
         setContentView(R.layout.activity_level01);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
@@ -98,7 +106,7 @@ public class MainLevel extends Activity {
         });
 
 
-        lightView = new LightView(this, level);
+        lightView = new LightView(this,this.level);
         layout.addView(lightView);
     }
 

@@ -27,6 +27,7 @@ public class LoseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainLevel.class);
+                intent.putExtra("level",1);
                 startActivity(intent);
             }
         });

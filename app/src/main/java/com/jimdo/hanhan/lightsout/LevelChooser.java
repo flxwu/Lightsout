@@ -111,9 +111,16 @@ public class LevelChooser extends Activity {
             btnLevel.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent;
                     switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
                         case 1:
-                            Intent intent = new Intent(getActivity(), MainLevel.class);
+                            intent = new Intent(getActivity(), MainLevel.class);
+                            intent.putExtra("level", 1);
+                            getActivity().startActivity(intent);
+                            break;
+                        case 2:
+                            intent = new Intent(getActivity(), MainLevel.class);
+                            intent.putExtra("level", 1);
                             getActivity().startActivity(intent);
                             break;
                     }
