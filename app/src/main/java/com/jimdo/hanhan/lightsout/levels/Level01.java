@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Level01 extends Level{
     ArrayList<Wall> arrayList;
-    final static Rect GOAL = new Rect(600,700,700,800);
+    final static Rect GOAL = new Rect(600,900,700,1000);
 
     public Level01() {
         arrayList=new ArrayList<Wall>(4);
