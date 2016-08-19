@@ -13,13 +13,15 @@ import java.util.ArrayList;
  */
 public class Level01 extends Level{
     ArrayList<Wall> arrayList;
-    final static Rect GOAL = new Rect(500,500,800,800);
+    final static Rect GOAL = new Rect(600,700,700,800);
 
     public Level01() {
-        arrayList=new ArrayList<Wall>(3);
+        arrayList=new ArrayList<Wall>(4);
         arrayList.add(new Wall(new Point(300,400),new Point(600,650)));
         arrayList.add(new Wall(new Point(150,100),new Point(200,300)));
         arrayList.add(new Wall(new Point(250,200),new Point(260,350)));
+        arrayList.add(new Wall(new Point(270,700),new Point(460,950)));
+
     }
 
     @Override

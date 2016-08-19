@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class LevelChooser extends Activity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     public Activity activity;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -41,18 +43,16 @@ public class LevelChooser extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_chooser);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
 
-        activity= super.getParent();
+        activity = super.getParent();
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
     }
 
@@ -108,17 +108,18 @@ public class LevelChooser extends Activity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_level_chooser, container, false);
-            Button btnLevel=(Button) rootView.findViewById(R.id.btnLevel);
-
+            Button btnLevel = (Button) rootView.findViewById(R.id.btnLevel);
+            
             btnLevel.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(getActivity(),MainLevel.class);
+                    Intent intent = new Intent(getActivity(), MainLevel.class);
                     getActivity().startActivity(intent);
                 }
             });
             return rootView;
         }
+
     }
 
     /**

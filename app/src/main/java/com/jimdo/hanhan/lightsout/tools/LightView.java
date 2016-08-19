@@ -18,6 +18,7 @@ import com.jimdo.hanhan.lightsout.MainLevel;
 import com.jimdo.hanhan.lightsout.WinScreen;
 
 import java.util.ArrayList;
+import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
@@ -32,8 +33,10 @@ public class LightView extends View {
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
     protected Level level;
-    protected Rect player;
+    protected Rect player=new Rect(35,195,45,205);
     protected MainLevel activity;
+    protected Timer timer=new Timer();
+    public int direction=DIRECTION_RIGHT;
     public final static int DIRECTION_LEFT = 1, DIRECTION_RIGHT = 2, DIRECTION_UP = 3, DIRECTION_DOWN = 4;
 
     public LightView(MainLevel activity, Level level) {
@@ -41,11 +44,20 @@ public class LightView extends View {
         this.activity = activity;
         this.level = level;
         paint.setColor(Color.argb(100, 255, 255, 255));
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                move(direction);
+            }
+        },50,50);
     }
 
+    /*
+    DRAWING METHODS
+     */
 
     @Override
-    public void onDraw(Canvas canvas) {
+    public void onDraw(final Canvas canvas) {
         super.onDraw(canvas);
         drawLightCone(canvas, centerX, centerY, rad);
         drawWall(canvas);
@@ -75,10 +87,15 @@ public class LightView extends View {
     }
 
     protected void drawGoal(Canvas canvas) {
-        paint.setColor(Color.rgb(30, 0, 0));
+        paint.setColor(Color.rgb(50, 0, 0));
+        paint.setAlpha(50);
         canvas.drawRect(level.getGoal(), paint);
     }
 
+    //--------------------------------------------
+    /*
+    Win/Lose Checks&Methods
+     */
     protected boolean isCollision() {
         ArrayList<Wall> wallArrayList = level.getWalls();
 
@@ -93,6 +110,7 @@ public class LightView extends View {
     }
 
     protected void lose() {
+        timer.cancel();
         Intent intent = new Intent(activity, LoseScreen.class);
         activity.startActivity(intent);
     }
@@ -107,6 +125,7 @@ public class LightView extends View {
     }
 
     protected void win() {
+        timer.cancel();
         Intent intent = new Intent(activity, WinScreen.class);
         activity.startActivity(intent);
     }
@@ -116,7 +135,7 @@ public class LightView extends View {
 
     public void setCenterX(float x) {
         this.centerX = x;
-        this.invalidate();
+        this.postInvalidate();
         if (isCollision()) {
             lose();
         }
@@ -127,7 +146,7 @@ public class LightView extends View {
 
     public void setCenterY(float y) {
         this.centerY = y;
-        this.invalidate();
+        this.postInvalidate();
         if (isCollision()) {
             lose();
         }
@@ -165,47 +184,47 @@ public class LightView extends View {
     }
 
     /*
-    Methods for moving
+    Methods for turning direction
      */
 
     public void turnUp() {
         setAngles(225,90);
+        direction=DIRECTION_UP;
     }
 
     public void turnDown() {
         setAngles(45, 90);
+        direction=DIRECTION_DOWN;
     }
 
     public void turnRight() {
         setAngles(315, 90);
+        direction=DIRECTION_RIGHT;
     }
 
     public void turnLeft() {
         setAngles(135, 90);
+        direction=DIRECTION_LEFT;
     }
 
+    /*
+    Auto-Moving
+     */
     public void move(int direction) {
         switch (direction) {
             case DIRECTION_DOWN:
-                setCenterY(getCenterY() + 10);
+                setCenterY(getCenterY() + 5);
                 break;
             case DIRECTION_LEFT:
-                setCenterX(getCenterX() - 10);
+                setCenterX(getCenterX() - 5);
                 break;
             case DIRECTION_RIGHT:
-                setCenterX(getCenterX() + 10);
+                setCenterX(getCenterX() + 5);
                 break;
             case DIRECTION_UP:
-                setCenterY(getCenterY() - 10);
+                setCenterY(getCenterY() - 5);
                 break;
         }
     }
 
-    class Timer extends TimerTask {
-
-        @Override
-        public void run() {
-            
-        }
-    }
 }
