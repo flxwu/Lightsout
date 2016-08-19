@@ -1,9 +1,6 @@
 package com.jimdo.hanhan.lightsout.tools;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,23 +17,22 @@ import com.jimdo.hanhan.lightsout.WinScreen;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 /**
  * Created by David Wu on 15.08.2016.
  */
 public class LightView extends View {
     Paint paint = new Paint();
-    protected float centerX = 40, centerY = 200, rad = 200, angle = 90, startangle = 315;
+    protected float centerX = 20, centerY = 200, rad = 150, angle = 90, startangle = 315;
     protected int position_x, position_y;
     protected GridLayout.LayoutParams params;
     protected Canvas canvas;
     protected Level level;
-    protected Rect player=new Rect(35,195,45,205);
+    protected Rect player = new Rect(35, 195, 45, 205);
     protected MainLevel activity;
-    protected Timer timer=new Timer();
-    public int direction=DIRECTION_RIGHT;
+    protected Timer timer = new Timer();
+    protected boolean isFirst = true;
+    public int direction = DIRECTION_RIGHT;
     public final static int DIRECTION_LEFT = 1, DIRECTION_RIGHT = 2, DIRECTION_UP = 3, DIRECTION_DOWN = 4;
 
     public LightView(MainLevel activity, Level level) {
@@ -44,12 +40,6 @@ public class LightView extends View {
         this.activity = activity;
         this.level = level;
         paint.setColor(Color.argb(100, 255, 255, 255));
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                move(direction);
-            }
-        },50,50);
     }
 
     /*
@@ -58,6 +48,7 @@ public class LightView extends View {
 
     @Override
     public void onDraw(final Canvas canvas) {
+
         super.onDraw(canvas);
         drawLightCone(canvas, centerX, centerY, rad);
         drawWall(canvas);
@@ -129,6 +120,15 @@ public class LightView extends View {
         Intent intent = new Intent(activity, WinScreen.class);
         activity.startActivity(intent);
     }
+
+    public void startTimer() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                move(direction);
+            }
+        }, 20, 20);
+    }
     /*
     Getters and Setters
      */
@@ -188,23 +188,39 @@ public class LightView extends View {
      */
 
     public void turnUp() {
-        setAngles(225,90);
-        direction=DIRECTION_UP;
+        setAngles(225, 90);
+        direction = DIRECTION_UP;
+        if (isFirst) {
+            startTimer();
+            isFirst=false;
+        }
     }
 
     public void turnDown() {
         setAngles(45, 90);
-        direction=DIRECTION_DOWN;
+        direction = DIRECTION_DOWN;
+        if (isFirst) {
+            startTimer();
+            isFirst=false;
+        }
     }
 
     public void turnRight() {
         setAngles(315, 90);
-        direction=DIRECTION_RIGHT;
+        direction = DIRECTION_RIGHT;
+        if (isFirst) {
+            startTimer();
+            isFirst=false;
+        }
     }
 
     public void turnLeft() {
         setAngles(135, 90);
-        direction=DIRECTION_LEFT;
+        direction = DIRECTION_LEFT;
+        if (isFirst) {
+            startTimer();
+            isFirst=false;
+        }
     }
 
     /*
