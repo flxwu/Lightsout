@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="LIGHTSOUT"
-        android:id="@+id/textView"
+        android:id="@+id/tVLevel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
@@ -37,10 +37,10 @@
         android:textSize="30dp"
         android:textStyle="bold|italic"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignLeft="@+id/tVLevel"
+        android:layout_alignStart="@+id/tVLevel"
         android:layout_marginBottom="192dp"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
+        android:layout_alignRight="@+id/tVLevel"
+        android:layout_alignEnd="@+id/tVLevel"
         android:theme="@style/Base.Widget.AppCompat.Button.Colored" />
 </RelativeLayout>

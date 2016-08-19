@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class LevelChooser extends Activity {
 
@@ -102,12 +105,18 @@ public class LevelChooser extends Activity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_level_chooser, container, false);
             Button btnLevel = (Button) rootView.findViewById(R.id.btnLevel);
+            TextView tVLevel=(TextView) rootView.findViewById(R.id.tVLevel);
+            tVLevel.setText("Level "+getArguments().getInt(ARG_SECTION_NUMBER));
 
             btnLevel.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), MainLevel.class);
-                    getActivity().startActivity(intent);
+                    switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+                        case 1:
+                            Intent intent = new Intent(getActivity(), MainLevel.class);
+                            getActivity().startActivity(intent);
+                            break;
+                    }
                 }
             });
             return rootView;

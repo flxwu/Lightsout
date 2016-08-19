@@ -11,9 +11,6 @@ import com.jimdo.hanhan.lightsout.levels.Level01;
 import com.jimdo.hanhan.lightsout.tools.Level;
 import com.jimdo.hanhan.lightsout.tools.LightView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 /**
  * Created by David Wu on 13.08.2016.
@@ -23,6 +20,10 @@ public class MainLevel extends Activity {
     protected LightView lightView;
     protected Button buttonUp, buttonDown, buttonRight, buttonLeft;
     protected Level level = new Level01();
+
+    public MainLevel() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
