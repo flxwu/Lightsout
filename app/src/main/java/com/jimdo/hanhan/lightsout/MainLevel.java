@@ -36,7 +36,7 @@ public class MainLevel extends Activity {
                 break;
         }
 
-        setContentView(R.layout.activity_level01);
+        setContentView(R.layout.activity_mainlevel);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.layout);
         buttonDown = (Button) findViewById(R.id.btnDown);
