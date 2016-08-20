@@ -48,8 +48,8 @@ public class LightView extends View {
 
     @Override
     public void onDraw(final Canvas canvas) {
-
         super.onDraw(canvas);
+        drawCredit(canvas);
         drawLightCone(canvas, centerX, centerY, rad);
         drawWall(canvas);
         drawGoal(canvas);
@@ -81,6 +81,11 @@ public class LightView extends View {
         paint.setColor(Color.rgb(50, 0, 0));
         paint.setAlpha(50);
         canvas.drawRect(level.getGoal(), paint);
+    }
+
+    protected void drawCredit(Canvas canvas) {
+        paint.setColor(Color.RED);
+        canvas.drawText("Lightsout by David Wu",2,10,paint);
     }
 
     //--------------------------------------------
@@ -121,6 +126,7 @@ public class LightView extends View {
         activity.startActivity(intent);
     }
 
+    //timer
     public void startTimer() {
         timer.schedule(new TimerTask() {
             @Override
