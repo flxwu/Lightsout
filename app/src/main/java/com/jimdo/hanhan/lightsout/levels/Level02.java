@@ -16,10 +16,12 @@ public class Level02 extends Level {
     final static Rect GOAL = new Rect(200,600,300,700);
 
     public Level02() {
-        arrayList=new ArrayList<Wall>(6);
+        arrayList=new ArrayList<Wall>(8);
         arrayList.add(new Wall(new Point(500,400),new Point(600,650)));
         arrayList.add(new Wall(new Point(150,100),new Point(200,300)));
         arrayList.add(new Wall(new Point(250,200),new Point(260,350)));
+        arrayList.add(new Wall(new Point(170,500),new Point(360,550)));
+        arrayList.add(new Wall(new Point(160,570),new Point(195,750)));
         arrayList.add(new Wall(new Point(270,700),new Point(460,950)));
         arrayList.add(new Wall(new Point(570,800),new Point(650,950)));
         arrayList.add(new Wall(new Point(670,1000),new Point(800,1150)));
