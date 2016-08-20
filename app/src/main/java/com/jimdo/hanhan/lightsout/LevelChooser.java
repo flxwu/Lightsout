@@ -120,7 +120,7 @@ public class LevelChooser extends Activity {
                             break;
                         case 2:
                             intent = new Intent(getActivity(), MainLevel.class);
-                            intent.putExtra("level", 1);
+                            intent.putExtra("level", 2);
                             getActivity().startActivity(intent);
                             break;
                     }
