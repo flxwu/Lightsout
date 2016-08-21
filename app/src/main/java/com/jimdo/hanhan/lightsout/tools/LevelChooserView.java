@@ -10,7 +10,7 @@ import android.graphics.Paint;
 
 
 /**
- * Created by daviwu16 on 19.08.2016.
+ * Created by David Wu on 19.08.2016(c)
  */
 public class LevelChooserView extends View {
     protected Paint paint;

@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.widget.Toast;
 
 /**
- * Created by David Wu on 20.08.2016.
+ * Created by David Wu on 20.08.2016(c)
  */
 
 public class CustomAlertBox {

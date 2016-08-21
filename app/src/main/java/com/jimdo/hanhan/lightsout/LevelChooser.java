@@ -18,6 +18,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+/**
+ * Created by David Wu on 18.08.2016(c)
+ *
+ */
 public class LevelChooser extends Activity {
 
     /**

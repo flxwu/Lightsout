@@ -14,7 +14,7 @@ import com.jimdo.hanhan.lightsout.tools.LightView;
 
 
 /**
- * Created by David Wu on 13.08.2016.
+ * Created by David Wu on 13.08.2016(c)
  */
 
 public class MainLevel extends Activity {

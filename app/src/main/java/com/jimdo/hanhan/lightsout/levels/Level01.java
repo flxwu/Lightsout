@@ -9,7 +9,7 @@ import com.jimdo.hanhan.lightsout.tools.Wall;
 import java.util.ArrayList;
 
 /**
- * Created by David Wu on 17.08.2016.
+ * Created by David Wu on 17.08.2016(c)
  */
 public class Level01 extends Level{
     ArrayList<Wall> arrayList;
@@ -32,5 +32,10 @@ public class Level01 extends Level{
     @Override
     public Rect getGoal() {
         return GOAL;
+    }
+
+    @Override
+    public int getLevel() {
+        return 1;
     }
 }

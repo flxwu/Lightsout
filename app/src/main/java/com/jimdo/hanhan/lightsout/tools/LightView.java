@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by David Wu on 15.08.2016.
+ * Created by David Wu on 15.08.2016(c)
  */
 public class LightView extends View {
     Paint paint = new Paint();

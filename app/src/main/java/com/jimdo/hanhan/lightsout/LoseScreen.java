@@ -10,7 +10,21 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jimdo.hanhan.lightsout.tools.Level;
+
+/**
+ * Created by David Wu on 18.08.2016(c)
+ *
+ */
+
 public class LoseScreen extends Activity {
+    protected Level level;
+
+    public LoseScreen() {
+    }
+    public LoseScreen(Level level) {
+        this.level=level;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +41,7 @@ public class LoseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainLevel.class);
-                intent.putExtra("level",1);
+                intent.putExtra("level",level.getLevel());
                 startActivity(intent);
             }
         });

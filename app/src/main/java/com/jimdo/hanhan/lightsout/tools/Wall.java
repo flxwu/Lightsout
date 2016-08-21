@@ -4,7 +4,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 /**
- * Created by David Wu on 16.08.2016.
+ * Created by David Wu on 16.08.2016(c)
  */
 
 public class Wall {
