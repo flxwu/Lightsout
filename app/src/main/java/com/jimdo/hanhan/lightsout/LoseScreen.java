@@ -19,11 +19,12 @@ import com.jimdo.hanhan.lightsout.tools.Level;
 
 public class LoseScreen extends Activity {
     protected Level level;
+    protected int levelInt;
 
     public LoseScreen() {
     }
-    public LoseScreen(Level level) {
-        this.level=level;
+    public LoseScreen(int levelInt) {
+        this.levelInt=levelInt;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class LoseScreen extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainLevel.class);
-                intent.putExtra("level",level.getLevel());
+                intent.putExtra("level",levelInt);
                 startActivity(intent);
             }
         });

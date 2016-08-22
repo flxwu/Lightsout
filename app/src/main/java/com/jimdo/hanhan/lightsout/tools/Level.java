@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 /**
  * Created by David Wu on 17.08.2016(c)
+ *
  */
+
 public abstract class Level {
     public abstract ArrayList<Wall> getWalls();
     public abstract Rect getGoal();
-    public abstract int getLevel();
+    public abstract Level getLevel();
+    public abstract int getLevelInt();
     public int getNextLevel() {
-        return getLevel()+1;
+        return getLevelInt()+1;
     }
 }
