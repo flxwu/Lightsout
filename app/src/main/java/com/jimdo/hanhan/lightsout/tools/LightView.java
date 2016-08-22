@@ -14,7 +14,6 @@ import com.jimdo.hanhan.lightsout.LoseScreen;
 import com.jimdo.hanhan.lightsout.MainLevel;
 import com.jimdo.hanhan.lightsout.WinScreen;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -109,7 +108,6 @@ public class LightView extends View {
     protected void lose() {
         timer.cancel();
         Intent intent = new Intent(activity, LoseScreen.class);
-        intent.putExtra("level",level.getLevelInt());
         activity.startActivity(intent);
     }
 
@@ -125,7 +123,6 @@ public class LightView extends View {
     protected void win() {
         timer.cancel();
         Intent intent = new Intent(activity, WinScreen.class);
-        intent.putExtra("level",level.getLevelInt());
         activity.startActivity(intent);
     }
 

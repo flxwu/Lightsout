@@ -35,12 +35,7 @@ public class Level01 extends Level{
     }
 
     @Override
-    public Level getLevel() {
-        return this;
-    }
-
-    @Override
-    public int getLevelInt() {
+    public int getLevel() {
         return 1;
     }
 }
