@@ -14,6 +14,7 @@ import com.jimdo.hanhan.lightsout.LoseScreen;
 import com.jimdo.hanhan.lightsout.MainLevel;
 import com.jimdo.hanhan.lightsout.WinScreen;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -85,7 +86,7 @@ public class LightView extends View {
 
     protected void drawCredit(Canvas canvas) {
         paint.setColor(Color.RED);
-        canvas.drawText("Lightsout by David Wu",2,10,paint);
+        canvas.drawText("Lightsout by David Wu", 2, 10, paint);
     }
 
     //--------------------------------------------
@@ -104,13 +105,9 @@ public class LightView extends View {
         }
         return false;
     }
-
-    protected void lose() {
-        timer.cancel();
-        Intent intent = new Intent(activity, LoseScreen.class);
-        activity.startActivity(intent);
+    protected boolean isOutofBorder() {
+        return false;
     }
-
     protected boolean isWin() {
         if (player.intersect(level.getGoal())) {
             return true;
@@ -120,11 +117,20 @@ public class LightView extends View {
         return false;
     }
 
+
     protected void win() {
         timer.cancel();
         Intent intent = new Intent(activity, WinScreen.class);
+        intent.putExtra("level", level.getLevel());
         activity.startActivity(intent);
     }
+    protected void lose() {
+        timer.cancel();
+        Intent intent = new Intent(activity, LoseScreen.class);
+        intent.putExtra("level", level.getLevel());
+        activity.startActivity(intent);
+    }
+
 
     //timer
     public void startTimer() {
@@ -135,41 +141,33 @@ public class LightView extends View {
             }
         }, 20, 20);
     }
+
+    //reloading after one move all in 1 method
+    protected void reload() {
+        this.postInvalidate();
+        if (isCollision()) {
+            lose();
+        }
+        if (isWin()) {
+            win();
+        }
+    }
     /*
     Getters and Setters
      */
 
     public void setCenterX(float x) {
         this.centerX = x;
-        this.postInvalidate();
-        if (isCollision()) {
-            lose();
-        }
-        if (isWin()) {
-            win();
-        }
+        reload();
     }
 
     public void setCenterY(float y) {
         this.centerY = y;
-        this.postInvalidate();
-        if (isCollision()) {
-            lose();
-        }
-        if (isWin()) {
-            win();
-        }
+        reload();
     }
 
     public void setRad(float r) {
         this.rad = r;
-        this.invalidate();
-        if (isCollision()) {
-            lose();
-        }
-        if (isWin()) {
-            win();
-        }
     }
 
     public void setAngles(float startangle, float angle) {
@@ -198,7 +196,7 @@ public class LightView extends View {
         direction = DIRECTION_UP;
         if (isFirst) {
             startTimer();
-            isFirst=false;
+            isFirst = false;
         }
     }
 
@@ -207,7 +205,7 @@ public class LightView extends View {
         direction = DIRECTION_DOWN;
         if (isFirst) {
             startTimer();
-            isFirst=false;
+            isFirst = false;
         }
     }
 
@@ -216,7 +214,7 @@ public class LightView extends View {
         direction = DIRECTION_RIGHT;
         if (isFirst) {
             startTimer();
-            isFirst=false;
+            isFirst = false;
         }
     }
 
@@ -225,7 +223,7 @@ public class LightView extends View {
         direction = DIRECTION_LEFT;
         if (isFirst) {
             startTimer();
-            isFirst=false;
+            isFirst = false;
         }
     }
 
