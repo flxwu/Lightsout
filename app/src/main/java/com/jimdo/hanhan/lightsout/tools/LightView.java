@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.GridLayout;
 
 import com.jimdo.hanhan.lightsout.LoseScreen;
@@ -32,14 +35,16 @@ public class LightView extends View {
     protected Rect player = new Rect(35, 195, 45, 205);
     protected MainLevel activity;
     protected Timer timer = new Timer();
+    protected WindowManager window;
     protected boolean isFirst = true;
     public int direction = DIRECTION_RIGHT;
     public final static int DIRECTION_LEFT = 1, DIRECTION_RIGHT = 2, DIRECTION_UP = 3, DIRECTION_DOWN = 4;
 
-    public LightView(MainLevel activity, Level level) {
+    public LightView(MainLevel activity, Level level, WindowManager window) {
         super(activity);
         this.activity = activity;
         this.level = level;
+        this.window = window;
         paint.setColor(Color.argb(100, 255, 255, 255));
     }
 
@@ -105,7 +110,18 @@ public class LightView extends View {
         }
         return false;
     }
-    protected boolean isOutofBorder() {
+    protected boolean isOutOfBorder() {
+        //get root display edges
+        Display display = window.getDefaultDisplay();
+        Point displaySize = new Point();
+        display.getSize(displaySize);
+        int maxX = displaySize.x;
+        int maxY = displaySize.y;
+        //--------------------
+        if ((int) player.centerX() >= maxX
+                || (int) player.centerY() >= maxY) {
+            return true;
+        }
         return false;
     }
     protected boolean isWin() {
@@ -116,7 +132,6 @@ public class LightView extends View {
         }
         return false;
     }
-
 
     protected void win() {
         timer.cancel();
@@ -145,12 +160,9 @@ public class LightView extends View {
     //reloading after one move all in 1 method
     protected void reload() {
         this.postInvalidate();
-        if (isCollision()) {
-            lose();
-        }
-        if (isWin()) {
-            win();
-        }
+        if (isCollision()) lose();
+        if (isOutOfBorder()) lose();
+        if (isWin()) win();
     }
     /*
     Getters and Setters

@@ -106,7 +106,7 @@ public class MainLevel extends Activity {
         });
 
 
-        lightView = new LightView(this,this.level);
+        lightView = new LightView(this,this.level,getWindowManager());
         layout.addView(lightView);
     }
 
