@@ -11,7 +11,6 @@ import com.jimdo.hanhan.lightsout.tools.Level;
 
 /**
  * Created by David Wu on 18.08.2016(c)
- *
  */
 public class WinScreen extends Activity {
     protected Level level;
@@ -19,8 +18,9 @@ public class WinScreen extends Activity {
     public WinScreen() {
 
     }
+
     public WinScreen(Level level) {
-        this.level=level;
+        this.level = level;
     }
 
     @Override
@@ -43,20 +43,25 @@ public class WinScreen extends Activity {
             }
         });
 
-        btnNextLevel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), MainLevel.class);
-                intent.putExtra("level",level.getNextLevel());
-                startActivity(intent);
-            }
-        });
+        if (getIntent().getIntExtra("level", 1) + 1 > R.integer.maxLevel) {
+            btnNextLevel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), MainLevel.class);
+                    intent.putExtra("level", (getIntent().getIntExtra("level", 1)) + 1);
+                    startActivity(intent);
+                }
+            });
+            btnNextLevel.setVisibility(View.VISIBLE);
+        } else {
+            btnNextLevel.setVisibility(View.INVISIBLE);
+        }
 
         btnTryAgain.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainLevel.class);
-                intent.putExtra("level", level.getLevel());
+                intent.putExtra("level", getIntent().getIntExtra("level", 1));
                 startActivity(intent);
             }
         });
