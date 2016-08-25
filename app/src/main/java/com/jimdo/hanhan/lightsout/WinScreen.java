@@ -3,10 +3,12 @@ package com.jimdo.hanhan.lightsout;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.jimdo.hanhan.lightsout.tools.CustomAlertBox;
 import com.jimdo.hanhan.lightsout.tools.Level;
 
 /**
@@ -42,8 +44,8 @@ public class WinScreen extends Activity {
                 startActivity(intent);
             }
         });
-
-        if (getIntent().getIntExtra("level", 1) + 1 > R.integer.maxLevel) {
+        int i=getIntent().getExtras().getInt("level");
+        if (i+1 <=MainLevel.MAX_LEVEL) {
             btnNextLevel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

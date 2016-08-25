@@ -11,8 +11,9 @@ import android.widget.Toast;
 
 public class CustomAlertBox {
     protected String text;
-    protected final static int TYPE_TOAST = 0;
-    protected final static int TYPE_ALERT = 1;
+    public final static int TYPE_TOAST = 0;
+    public final static int TYPE_ALERT = 1;
+    public final static int TYPE_DEBUG = 2;
 
     public CustomAlertBox(Context context,int type) {
         type(context,type);
@@ -47,6 +48,20 @@ public class CustomAlertBox {
                         });
                 AlertDialog alert = builder.create();
                 alert.show();
+                break;
+            case TYPE_DEBUG:
+                AlertDialog.Builder debug = new AlertDialog.Builder(context);
+                debug.setTitle("DEBUG")
+                        .setMessage(text)
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog debugalert = debug.create();
+                debugalert.show();
                 break;
         }
     }

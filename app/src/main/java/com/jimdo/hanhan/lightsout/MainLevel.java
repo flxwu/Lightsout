@@ -22,6 +22,8 @@ public class MainLevel extends Activity {
     protected Button buttonUp, buttonDown, buttonRight, buttonLeft;
     protected Level level;
 
+    public final static int MAX_LEVEL=2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
