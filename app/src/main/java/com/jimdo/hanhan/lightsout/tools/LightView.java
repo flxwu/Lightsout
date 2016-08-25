@@ -110,6 +110,7 @@ public class LightView extends View {
         }
         return false;
     }
+
     protected boolean isOutOfBorder() {
         //get root display edges
         Display display = window.getDefaultDisplay();
@@ -119,11 +120,14 @@ public class LightView extends View {
         int maxY = displaySize.y;
         //--------------------
         if ((int) player.centerX() >= maxX
-                || (int) player.centerY() >= maxY) {
+                || (int) player.centerY() >= maxY
+                || (int) player.centerX() <= 0
+                || (int) player.centerY() <= 0) {
             return true;
         }
         return false;
     }
+
     protected boolean isWin() {
         if (player.intersect(level.getGoal())) {
             return true;
@@ -139,6 +143,7 @@ public class LightView extends View {
         intent.putExtra("level", level.getLevel());
         activity.startActivity(intent);
     }
+
     protected void lose() {
         timer.cancel();
         Intent intent = new Intent(activity, LoseScreen.class);
@@ -160,9 +165,15 @@ public class LightView extends View {
     //reloading after one move all in 1 method
     protected void reload() {
         this.postInvalidate();
-        if (isCollision()) lose();
-        if (isOutOfBorder()) lose();
-        if (isWin()) win();
+        if (isCollision()) {
+            lose();
+        }
+        if (isOutOfBorder()) {
+            lose();
+        }
+        if (isWin()) {
+            win();
+        }
     }
     /*
     Getters and Setters
