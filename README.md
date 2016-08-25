@@ -5,7 +5,8 @@
 Android Game developed by David Wu using Android SDK 
 
 Your task is to reach the goal in different levels,but your field of vision is extremely decreased,you only have a small light cone inside a big dark room
-----------License-----------------
+
+---------- License-----------------
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
