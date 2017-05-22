@@ -1,6 +1,4 @@
 # Lightsout
-
-  Copyright(c) 2016 David Wu
   
 Android Game developed by David Wu using Android SDK 
 
